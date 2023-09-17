@@ -40,7 +40,7 @@ namespace KFramework
             IServiceCollection services,IApplicationLifeManager? lifeManager=null,IApplicationInfo?
             applicationInfo = null,IConfiguration? configuration = null,IConfigurationBuilder? configurationBuilder=null,Action<KApplicationCreationOptions>? options=null)
         {
-            #region InjectSelf (DI)
+            #region Inject Self (DI)
             services.AddSingleton<IKApplication>(this);
             services.AddSingleton<KApplication>(this);
             #endregion

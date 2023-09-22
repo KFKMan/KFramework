@@ -1,13 +1,13 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace KFramework
+namespace KFramework.Extensions
 {
     public static class ConfigurationExtensions
     {
-        public static K? TryGetOrNull<K>(this IConfiguration config,string key) where K : class
+        public static K? TryGetOrNull<K>(this IConfiguration config, string key) where K : class
         {
             var k = config.GetValue<K>(key);
-            if(k != null)
+            if (k != null)
             {
                 return k;
             }
@@ -28,7 +28,7 @@ namespace KFramework
     {
         public static bool IsNullOrEmpty<T>(this T[]? array)
         {
-            if(array == null ||
+            if (array == null ||
                 array.Length == 0)
             {
                 return true;

@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace KFramework
+namespace KFramework.Extensions
 {
     public static class TypeExtensions
     {

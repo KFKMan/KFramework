@@ -1,5 +1,6 @@
-﻿using Detached.Modules.Components;
-using KFramework.Module;
+﻿using KFramework.Module;
+using KFramework.Module.Abstractions;
+using KFramework.Module.Components;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
@@ -10,9 +11,9 @@ namespace KFramework.Module.Annotations
     {
         public ServiceLifetime LifeTime { get; set; } = ServiceLifetime.Scoped;
 
-        public Type ContractType { get; set; }
+        public Type? ContractType { get; set; }
 
-        public void AddToModule(Type type, Module module)
+        public void AddToModule(Type type, IModule module)
         {
             module.Components.Add(new ServiceComponent(new ServiceDescriptor(ContractType ?? type, type, LifeTime)));
         }

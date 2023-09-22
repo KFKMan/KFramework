@@ -1,12 +1,14 @@
-﻿namespace KFramework
+﻿using Microsoft.Extensions.Configuration;
+
+namespace KFramework
 {
     public class DefaultApplicationInfo : IApplicationInfo
     {
         public DefaultApplicationInfo() { }
         public DefaultApplicationInfo(KApplicationCreationOptions options) 
         {
-            ApplicationName = options.Configuration.TryGetOrNull<string>(IApplicationInfo.ApplicationNameKey);
-            ApplicationDescription = options.Configuration.TryGetOrNull<string>(IApplicationInfo.ApplicationDescriptionKey);
+            ApplicationName = options.Configuration.GetValue<string>(IApplicationInfo.ApplicationNameKey);
+            ApplicationDescription = options.Configuration.GetValue<string>(IApplicationInfo.ApplicationDescriptionKey);
         }
 
         public string? ApplicationName { get; } = null;

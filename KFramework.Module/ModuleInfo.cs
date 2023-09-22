@@ -1,11 +1,12 @@
-﻿using System;
+﻿using KFramework.Module.Abstractions;
+using System;
 using System.Collections.Generic;
 
 namespace KFramework.Module
 {
-    public class ModuleInfo
+    public class ModuleInfo : IModuleInfo
     {
-        public ModuleInfo(string name, string version, ModuleInfo[] modules, ComponentInfo[] components)
+        public ModuleInfo(string name, string version, IModuleInfo[] modules, IComponentInfo[] components)
         {
             Name = name;
             Version = version;
@@ -17,8 +18,8 @@ namespace KFramework.Module
 
         public string Version { get; }
 
-        public IReadOnlyList<ModuleInfo> Modules { get; }
+        public IReadOnlyList<IModuleInfo> Modules { get; }
 
-        public IReadOnlyList<ComponentInfo> Components { get; }
+        public IReadOnlyList<IComponentInfo> Components { get; }
     }
 }

@@ -2,6 +2,7 @@
 {
     public class DefaultLifeManager : IApplicationLifeManager
     {
+#warning DefaultLifeManager is not implemented !
         public EventHandler OnClosing { get; set; }
         public EventHandler OnClosed { get; set; }
         public EventHandler OnStarting { get; set; }
@@ -15,7 +16,7 @@
 
         public Task CloseAsync()
         {
-            
+            return Task.CompletedTask;
         }
     }
 }

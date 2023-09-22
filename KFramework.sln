@@ -5,11 +5,15 @@ VisualStudioVersion = 17.6.33712.159
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KFramework", "KFramework\KFramework.csproj", "{4F1DB8C7-1F93-412C-86A0-7A426690E8E4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KFramework.Integration.AspCore", "KApplication.Integration.AspCore\KFramework.Integration.AspCore.csproj", "{3F134F01-B97A-4D7D-A39A-EFEB68307207}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "web", "web\web.csproj", "{4CC5F1C2-8AD7-4EC9-A9E9-A534DCB0ABC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFramework.Module", "KFramework.Module\KFramework.Module.csproj", "{BDC6BA81-93E2-4445-865A-CA89AF5C0CC8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KFramework.Module", "KFramework.Module\KFramework.Module.csproj", "{BDC6BA81-93E2-4445-865A-CA89AF5C0CC8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KFramework.Integration.AspCore", "KFramework.Integration.AspCore\KFramework.Integration.AspCore.csproj", "{A2B918D3-9AD0-4202-A976-198DCECA71D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFramework.Module.Abstractions", "KFramework.Module.Abstractions\KFramework.Module.Abstractions.csproj", "{1E78BDD3-743A-497D-95AE-34479C7398ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFramework.Extensions", "KFramework.Extensions\KFramework.Extensions.csproj", "{04C942AE-4A51-4809-B54E-4FAA99487AE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,10 +25,6 @@ Global
 		{4F1DB8C7-1F93-412C-86A0-7A426690E8E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4F1DB8C7-1F93-412C-86A0-7A426690E8E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F1DB8C7-1F93-412C-86A0-7A426690E8E4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3F134F01-B97A-4D7D-A39A-EFEB68307207}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3F134F01-B97A-4D7D-A39A-EFEB68307207}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3F134F01-B97A-4D7D-A39A-EFEB68307207}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3F134F01-B97A-4D7D-A39A-EFEB68307207}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4CC5F1C2-8AD7-4EC9-A9E9-A534DCB0ABC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4CC5F1C2-8AD7-4EC9-A9E9-A534DCB0ABC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4CC5F1C2-8AD7-4EC9-A9E9-A534DCB0ABC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -33,6 +33,18 @@ Global
 		{BDC6BA81-93E2-4445-865A-CA89AF5C0CC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDC6BA81-93E2-4445-865A-CA89AF5C0CC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDC6BA81-93E2-4445-865A-CA89AF5C0CC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2B918D3-9AD0-4202-A976-198DCECA71D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2B918D3-9AD0-4202-A976-198DCECA71D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2B918D3-9AD0-4202-A976-198DCECA71D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2B918D3-9AD0-4202-A976-198DCECA71D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E78BDD3-743A-497D-95AE-34479C7398ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E78BDD3-743A-497D-95AE-34479C7398ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E78BDD3-743A-497D-95AE-34479C7398ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E78BDD3-743A-497D-95AE-34479C7398ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04C942AE-4A51-4809-B54E-4FAA99487AE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04C942AE-4A51-4809-B54E-4FAA99487AE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04C942AE-4A51-4809-B54E-4FAA99487AE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04C942AE-4A51-4809-B54E-4FAA99487AE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

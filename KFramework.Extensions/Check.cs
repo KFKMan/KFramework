@@ -1,4 +1,4 @@
-﻿namespace KFramework
+﻿namespace KFramework.Extensions
 {
     public static class Check
     {
@@ -150,8 +150,8 @@
             return value;
         }
 
-        public static Int16 Positive(
-            Int16 value,
+        public static short Positive(
+            short value,
             string parameterName)
         {
             if (value == 0)
@@ -165,8 +165,8 @@
             return value;
         }
 
-        public static Int32 Positive(
-            Int32 value,
+        public static int Positive(
+            int value,
             string parameterName)
         {
             if (value == 0)
@@ -180,8 +180,8 @@
             return value;
         }
 
-        public static Int64 Positive(
-            Int64 value,
+        public static long Positive(
+            long value,
             string parameterName)
         {
             if (value == 0)
@@ -240,11 +240,11 @@
             return value;
         }
 
-        public static Int16 Range(
-            Int16 value,
+        public static short Range(
+            short value,
             string parameterName,
-            Int16 minimumValue,
-            Int16 maximumValue = Int16.MaxValue)
+            short minimumValue,
+            short maximumValue = short.MaxValue)
         {
             if (value < minimumValue || value > maximumValue)
             {
@@ -253,11 +253,11 @@
 
             return value;
         }
-        public static Int32 Range(
-            Int32 value,
+        public static int Range(
+            int value,
             string parameterName,
-            Int32 minimumValue,
-            Int32 maximumValue = Int32.MaxValue)
+            int minimumValue,
+            int maximumValue = int.MaxValue)
         {
             if (value < minimumValue || value > maximumValue)
             {
@@ -267,11 +267,11 @@
             return value;
         }
 
-        public static Int64 Range(
-            Int64 value,
+        public static long Range(
+            long value,
             string parameterName,
-            Int64 minimumValue,
-            Int64 maximumValue = Int64.MaxValue)
+            long minimumValue,
+            long maximumValue = long.MaxValue)
         {
             if (value < minimumValue || value > maximumValue)
             {

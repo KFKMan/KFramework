@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using KFramework.Extensions;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace KFramework
 {
@@ -92,7 +93,7 @@ namespace KFramework
         public static T? GetObjectOrNull<T>(this IServiceCollection services)
             where T : class
         {
-            return services.GetSingletonInstanceOrNull<IObjectAccessor<T>>()?.Value;
+            return services.GetSingletonInstanceOrNull<IObjectAccessor<T>>().IfNotNull((A)=>A.Get(),null);
         }
 
         public static T GetObject<T>(this IServiceCollection services)

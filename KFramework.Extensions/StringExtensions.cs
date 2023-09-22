@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 using System.Text.RegularExpressions;
 using System.Text;
 
-namespace KFramework
+namespace KFramework.Extensions
 {
     public static class StringExtensions
     {
@@ -41,7 +41,7 @@ namespace KFramework
         /// <summary>
         /// Indicates whether this string is null or an System.String.Empty string.
         /// </summary>
-        public static bool IsNullOrEmpty([System.Diagnostics.CodeAnalysis.NotNullWhen(false)] this string? str)
+        public static bool IsNullOrEmpty([NotNullWhen(false)] this string? str)
         {
             return string.IsNullOrEmpty(str);
         }
@@ -49,7 +49,7 @@ namespace KFramework
         /// <summary>
         /// indicates whether this string is null, empty, or consists only of white-space characters.
         /// </summary>
-        public static bool IsNullOrWhiteSpace([System.Diagnostics.CodeAnalysis.NotNullWhen(false)] this string? str)
+        public static bool IsNullOrWhiteSpace([NotNullWhen(false)] this string? str)
         {
             return string.IsNullOrWhiteSpace(str);
         }
@@ -97,7 +97,7 @@ namespace KFramework
                     continue;
                 }
 
-                if ((++count) == n)
+                if (++count == n)
                 {
                     return i;
                 }
@@ -507,7 +507,7 @@ namespace KFramework
         /// <exception cref="ArgumentNullException">Thrown if <paramref name="str"/> is null</exception>
         public static string? TruncateWithPostfix(this string? str, int maxLength)
         {
-            return TruncateWithPostfix(str, maxLength, "...");
+            return str.TruncateWithPostfix(maxLength, "...");
         }
 
         /// <summary>
@@ -564,7 +564,7 @@ namespace KFramework
         {
             for (int i = 0; i < input.Length; i++)
             {
-                if (Char.IsLetter(input[i]) && !Char.IsUpper(input[i]))
+                if (char.IsLetter(input[i]) && !char.IsUpper(input[i]))
                 {
                     return false;
                 }

@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System;
 using Microsoft.Extensions.Configuration;
+using KFramework.Extensions;
 
 namespace KFramework
 {

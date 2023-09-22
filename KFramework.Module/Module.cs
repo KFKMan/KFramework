@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using KFramework.Module.Abstractions;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -8,7 +9,7 @@ using System.Reflection;
 
 namespace KFramework.Module
 {
-    public class Module
+    public class Module : IModule
     {
         public Module()
         {
@@ -23,9 +24,9 @@ namespace KFramework.Module
 
         public Version Version { get; set; }
 
-        public List<IComponent> Components { get; } = new List<IComponent>();
+        public List<IComponent> Components { get; } = new();
 
-        public List<Module> Modules { get; } = new List<Module>();
+        public List<IModule> Modules { get; } = new();
 
         public virtual void ConfigureServices(IServiceCollection services, IConfiguration configuration, IHostEnvironment hostEnvironment)
         {
@@ -34,7 +35,7 @@ namespace KFramework.Module
                 component.ConfigureServices(this, services, configuration, hostEnvironment);
             }
 
-            foreach (Module module in Modules)
+            foreach (IModule module in Modules)
             {
                 module.ConfigureServices(services, configuration, hostEnvironment);
             }
@@ -47,7 +48,7 @@ namespace KFramework.Module
                 yield return component;
             }
 
-            foreach (Module submodule in Modules)
+            foreach (IModule submodule in Modules)
             {
                 foreach (IComponent component in submodule.GetComponents())
                 {
@@ -120,7 +121,7 @@ namespace KFramework.Module
             annotation.AddToModule(type, this);
         }
 
-        public virtual void AddModule(Module module)
+        public virtual void AddModule(IModule module)
         {
             Modules.Add(module);
         }
@@ -130,32 +131,21 @@ namespace KFramework.Module
             return type.GetCustomAttributes().OfType<IComponentType>().FirstOrDefault();
         }
 
-        public virtual ModuleInfo GetInfo()
+        public virtual IModuleInfo GetInfo()
         {
-            ModuleInfo[] submodules = new ModuleInfo[Modules.Count];
+            IModuleInfo[] submodules = new IModuleInfo[Modules.Count];
             for (int i = 0; i < submodules.Length; i++)
             {
                 submodules[i] = Modules[i].GetInfo();
             }
 
-            ComponentInfo[] components = new ComponentInfo[Components.Count];
+            IComponentInfo[] components = new IComponentInfo[Components.Count];
             for (int i = 0; i < components.Length; i++)
             {
                 components[i] = Components[i].GetInfo();
             }
 
             return new ModuleInfo(Name, Version.ToString(), submodules, components);
-        }
-    }
-
-    public class VersionHelper
-    {
-        public static Version DefaultVersion
-        {
-            get
-            {
-                return new Version(1, 0, 0, 0); //can be clone used but casting...
-            }
         }
     }
 }

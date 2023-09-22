@@ -16,6 +16,6 @@ internal static class InternalServiceCollectionExtensions
         //,AbpApplicationCreationOptions applicationCreationOptions
         )
     {
-#warning Module Sistemi gelecek !
+#warning TODO: Module System
     }
 }

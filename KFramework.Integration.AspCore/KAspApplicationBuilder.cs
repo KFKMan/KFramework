@@ -15,7 +15,7 @@ namespace KFramework.Integration.AspCore
 
         public KAspApplication CreateApp()
         {
-            var app = new KAspApplication(typeof(KAspApplicationBuilder), Builder.Services, configurationBuilder: Builder.Configuration);
+            var app = new KAspApplication(new KAspApplicationSettings().SetStartupModuleType(typeof(KAspApplicationBuilder)).SetServiceCollection(Builder.Services).SetConfigurationBuilder(Builder.Configuration));
             Applications.Add(app);
             return app;
         }

@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using KFramework.Abstractions;
+using Microsoft.Extensions.Configuration;
 
 namespace KFramework
 {
@@ -13,6 +14,7 @@ namespace KFramework
 
         public string? ApplicationName { get; } = null;
         public string? ApplicationDescription { get; } = null;
+        public Version? Version { get; } = null;
         public string InstanceId { get; } = Guid.NewGuid().ToString();
     }
 }

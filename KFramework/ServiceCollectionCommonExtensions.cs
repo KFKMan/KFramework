@@ -1,4 +1,5 @@
-﻿using KFramework.Extensions;
+﻿using KFramework.Abstractions;
+using KFramework.Extensions;
 using Microsoft.Extensions.DependencyInjection;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
@@ -16,8 +17,6 @@ namespace KFramework
         {
             return services.Any(d => d.ServiceType == type);
         }
-
-        
 
         public static T? GetSingletonInstanceOrNull<T>(this IServiceCollection services)
         {

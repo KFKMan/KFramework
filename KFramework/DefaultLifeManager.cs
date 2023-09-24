@@ -1,4 +1,6 @@
-﻿namespace KFramework
+﻿using KFramework.Abstractions;
+
+namespace KFramework
 {
     public class DefaultLifeManager : IApplicationLifeManager
     {

@@ -1,4 +1,6 @@
-﻿namespace KFramework
+﻿using KFramework.Abstractions;
+
+namespace KFramework
 {
     public class ExtendedObjectAccessor<K,T> : IObjectAccessor<T>
     {
@@ -11,12 +13,9 @@
             BaseValue = basevalue;
         }
 
-        public T? Value
+        public T? Get()
         {
-            get
-            {
-                return Getter.Get(BaseValue);
-            }
+            return Getter.Get(BaseValue);
         }
     }
 }

@@ -18,7 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\KFramework.Abstractions\KFramework.Abstractions.csproj" />
     <ProjectReference Include="..\KFramework.Extensions\KFramework.Extensions.csproj" />
+    <ProjectReference Include="..\KFramework.Module\KFramework.Module.csproj" />
   </ItemGroup>
 
 </Project>

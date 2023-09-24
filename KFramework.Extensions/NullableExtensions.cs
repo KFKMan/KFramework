@@ -38,8 +38,12 @@
 
         public static X NullableActionWithReturn<T,X>(this T? value, Func<T, X> function,X? defaultvalue = default(X))
         {
-            return NullableAction(value, function.AsAction(out var handler))
-                .IfFalse(() => defaultvalue.Return(),handler.Value);
+            var state = NullableAction(value, function.AsAction(out var handler));
+            if (state == false)
+            {
+                defaultvalue.Return();
+            }
+            return handler.Value!;
         }
 
         public static T DefaultIfNull<T>(this T? value,T? defaultvalue = default(T))

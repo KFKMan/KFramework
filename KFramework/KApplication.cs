@@ -4,6 +4,10 @@ using System.Reflection;
 using System;
 using Microsoft.Extensions.Configuration;
 using KFramework.Extensions;
+using KFramework.Module.Abstractions;
+using KFramework.Abstractions;
+using KFramework.Module;
+using Microsoft.Extensions.Hosting;
 
 namespace KFramework
 {
@@ -11,99 +15,136 @@ namespace KFramework
     {
         public Type StartupModuleType { get; }
 
-        public IConfigurationBuilder? ConfigurationBuilder { get; } = null;
+        public IConfigurationBuilder? ConfigurationBuilder { get; private set; } = null;
 
-        public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; private set; }
 
-        public IApplicationInfo ApplicationInfo { get; }
+        public IApplicationInfo ApplicationInfo { get; private set; }
 
-        public IServiceProvider ServiceProvider { get; set; } = default!;
+        public IServiceProvider ServiceProvider { get; private set; } = default!;
 
-        public IServiceCollection Services { get; set; }
+        public IServiceCollection Services { get; private set; }
 
-        public IApplicationLifeManager LifeManager { get; }
+        public IApplicationLifeManager LifeManager { get; private set; }
+
+        public IModule Module { get; }
+
+        public IModuleBuilder ModuleBuilder { get; }
+
+        public IHostEnvironment HostEnvironment { get; private set; }
+
+        public IHost? Host { get; } = null;
 
         public string? ApplicationName { get; }
 
         public string InstanceId { get; } = Guid.NewGuid().ToString();
-        
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="startupModuleType"></param>
-        /// <param name="services"></param>
-        /// <param name="lifeManager"></param>
-        /// <param name="applicationInfo"></param>
-        /// <param name="configuration"></param>
-        /// <param name="configurationBuilder">don't set if you are set configuration variable</param>
-        /// <param name="options"></param>
-        public KApplication(Type startupModuleType,
-            IServiceCollection services,IApplicationLifeManager? lifeManager=null,IApplicationInfo?
-            applicationInfo = null,IConfiguration? configuration = null,IConfigurationBuilder? configurationBuilder=null,Action<KApplicationCreationOptions>? options=null)
+
+        public KApplication(KApplicationSettings settings)
         {
+            settings.StartupModuleType.ThrowIfNull();
+            settings.ServiceCollection.ThrowIfNull();
+
+            StartupModuleType = settings.StartupModuleType!;
+            Services = settings.ServiceCollection!;
+
             #region Inject Self (DI)
-            services.AddSingleton<IKApplication>(this);
-            services.AddSingleton<KApplication>(this);
+            Services.AddSingleton<IKApplication>(this);
+            Services.AddSingleton<KApplication>(this);
             #endregion
 
-            Check.NotNull(startupModuleType, nameof(startupModuleType));
-            Check.NotNull(services, nameof(services));
-
-            StartupModuleType = startupModuleType;
-            Services = services;
-
             #region Configuration
-            if (configuration != null)
+            if (settings.Configuration.IsNotNull())
             {
-                Configuration = configuration;
+                Configuration = settings.Configuration!;
             }
             else
             {
-                if(configurationBuilder != null)
+                if (settings.ConfigurationBuilder.IsNotNull())
                 {
-                    ConfigurationBuilder = configurationBuilder;
+                    ConfigurationBuilder = settings.ConfigurationBuilder;
                 }
                 else
                 {
                     ConfigurationBuilder = new ConfigurationBuilder();
                 }
-                Configuration = ConfigurationBuilder.Build();
+                Configuration = ConfigurationBuilder!.Build();
             }
-            var accessor = services.AddOrGetExtendedObjectAccessor<IKApplication, IConfiguration>(x => x.Configuration, this);
+            //it's needed?
+            //var accessor = Services.AddOrGetExtendedObjectAccessor<IKApplication, IConfiguration>(x => x.Configuration, this);
+            #endregion
+
+            #region HostEnvironment
+            if(settings.HostEnvironment != null)
+            {
+                HostEnvironment = settings.HostEnvironment;
+            }
+            else
+            {
+                var hostbuilder = Microsoft.Extensions.Hosting.Host.CreateApplicationBuilder(settings.Args);
+                var host = hostbuilder.Build();
+                HostEnvironment = hostbuilder.Environment;
+            }
             #endregion
 
             #region ApplicationCreationOptions
             var creationoptions = new KApplicationCreationOptions(Services, Configuration);
             #endregion
 
-            #region LifeManager
-            if (lifeManager != null)
-            {
-                LifeManager = lifeManager;
-            }
-            else
-            {
-                LifeManager = new DefaultLifeManager();
-            }
-            services.AddSingleton<IApplicationLifeManager>(LifeManager);
-            #endregion
-
             #region ApplicationInfo
-            if (applicationInfo != null)
+            if (settings.ApplicationInfo.IsNotNull())
             {
-                ApplicationInfo = applicationInfo;
+                ApplicationInfo = settings.ApplicationInfo!;
             }
             else
             {
                 ApplicationInfo = new DefaultApplicationInfo(creationoptions);
             }
-            services.AddSingleton<IApplicationInfo>(ApplicationInfo);
+            Services.AddSingleton<IApplicationInfo>(ApplicationInfo);
+            #endregion
+
+            #region Module
+            if (settings.ModuleBuilder.IsNotNull())
+            {
+                ModuleBuilder = settings.ModuleBuilder!;
+            }
+            else
+            {
+                ModuleBuilder = new ModuleBuilder();
+            }
+
+            if (ApplicationInfo.ApplicationName.IsNotNull()) {
+                ModuleBuilder.SetName(ApplicationInfo.ApplicationName!);
+            }
+            ModuleBuilder.SetMainType(StartupModuleType);
+            if (ApplicationInfo.Version.IsNotNull())
+            {
+                ModuleBuilder.SetVersion(ApplicationInfo.Version!);
+            }
+            Module = ModuleBuilder.Build();
+
+            #endregion
+
+            #region LifeManager
+            if (settings.LifeManager.IsNotNull())
+            {
+                LifeManager = settings.LifeManager!;
+            }
+            else
+            {
+                LifeManager = new DefaultLifeManager();
+            }
+            Services.AddSingleton<IApplicationLifeManager>(LifeManager);
             #endregion
 
             #region Core Services
-            services.AddCoreServices();
-            services.AddCoreKServices(this);
+            Services.AddCoreServices();
+            Services.AddCoreKServices(this);
             #endregion
+        }
+
+        public void Configure()
+        {
+            Module.ConfigureServices(Services, Configuration, HostEnvironment);
         }
 
         public void Dispose()

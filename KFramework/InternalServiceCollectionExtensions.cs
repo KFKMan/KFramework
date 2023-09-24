@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using KFramework;
 using Microsoft.Extensions.Configuration;
+using KFramework.Abstractions;
 
 internal static class InternalServiceCollectionExtensions
 {

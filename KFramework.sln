@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KFramework.Module", "KFrame
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KFramework.Integration.AspCore", "KFramework.Integration.AspCore\KFramework.Integration.AspCore.csproj", "{A2B918D3-9AD0-4202-A976-198DCECA71D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFramework.Module.Abstractions", "KFramework.Module.Abstractions\KFramework.Module.Abstractions.csproj", "{1E78BDD3-743A-497D-95AE-34479C7398ED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KFramework.Module.Abstractions", "KFramework.Module.Abstractions\KFramework.Module.Abstractions.csproj", "{1E78BDD3-743A-497D-95AE-34479C7398ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFramework.Extensions", "KFramework.Extensions\KFramework.Extensions.csproj", "{04C942AE-4A51-4809-B54E-4FAA99487AE5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KFramework.Extensions", "KFramework.Extensions\KFramework.Extensions.csproj", "{04C942AE-4A51-4809-B54E-4FAA99487AE5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KFramework.Abstractions", "KFramework.Abstractions\KFramework.Abstractions.csproj", "{87F61522-0C30-4088-8F05-CECB46E15A99}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{04C942AE-4A51-4809-B54E-4FAA99487AE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04C942AE-4A51-4809-B54E-4FAA99487AE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04C942AE-4A51-4809-B54E-4FAA99487AE5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87F61522-0C30-4088-8F05-CECB46E15A99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87F61522-0C30-4088-8F05-CECB46E15A99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87F61522-0C30-4088-8F05-CECB46E15A99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87F61522-0C30-4088-8F05-CECB46E15A99}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

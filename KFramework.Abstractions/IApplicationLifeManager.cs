@@ -1,4 +1,4 @@
-﻿namespace KFramework
+﻿namespace KFramework.Abstractions
 {
     public interface IApplicationLifeManager
     {

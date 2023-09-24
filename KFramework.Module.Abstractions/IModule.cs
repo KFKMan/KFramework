@@ -6,8 +6,9 @@ namespace KFramework.Module.Abstractions
 {
     public interface IModule
     {
-        string Name { get; set; }
-        Version Version { get; set; }
+        Type? MainType { get; }
+        string Name { get; }
+        Version Version { get; }
         List<IComponent> Components { get; }
         List<IModule> Modules { get; }
 

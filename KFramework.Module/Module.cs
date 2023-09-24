@@ -18,6 +18,9 @@ namespace KFramework.Module
             Version = ThisType.Assembly.GetName().Version ?? VersionHelper.DefaultVersion;
         }
 
+
+        public Type? MainType { get; set; } = null;
+
         private Type ThisType { get; set; }
 
         public string Name { get; set; }

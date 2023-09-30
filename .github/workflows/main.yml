@@ -32,7 +32,11 @@ jobs:
       run: dotnet nuget add source --username KFKMan --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/KFKMan/index.json"
     - name: dotnet nuget push v2
       if: always()
-      run: dotnet nuget push **/*.nupkg --skip-duplicate --api-key ${{secrets.NUGET_AUTH_TOKEN}}
+      run: dotnet nuget push **/*.nupkg --skip-duplicate
+      env:
+          NUGET_AUTH_TOKEN: ${{secrets.NUGET_AUTH_TOKEN}}     
     - name: dotnet nuget push v3
       if: always()
-      run: dotnet nuget push **/*.nupkg --skip-duplicate --api-key ${{secrets.GITHUB_TOKEN}}
+      run: dotnet nuget push **/*.nupkg --skip-duplicate
+      env:
+          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}} 

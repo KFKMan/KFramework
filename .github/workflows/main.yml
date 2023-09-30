@@ -32,14 +32,14 @@ jobs:
     - name: dotnet nuget push v2
       run: dotnet nuget push **/*.nupkg --source --skip-duplicate
     - name: dotnet nuget push v3
-      run: dotnet nuget push ./KFramework/packages/*.nupkg --source --skip-duplicate
+      run: dotnet nuget push ./KFramework/packages/*.nupkg --skip-duplicate
     - name: dotnet nuget push v4
-      run: dotnet nuget push ./KFramework/KFramework/packages/*.nupkg --source --skip-duplicate
+      run: dotnet nuget push ./KFramework/KFramework/packages/*.nupkg --skip-duplicate
     - name: dotnet nuget push v5
-      run: dotnet nuget push "**/*.nupkg" --source --skip-duplicate
+      run: dotnet nuget push "**/*.nupkg" --skip-duplicate
     - name: dotnet nuget push v6
-      run: dotnet nuget push "./KFramework/packages/*.nupkg" --source --skip-duplicate
+      run: dotnet nuget push "./KFramework/packages/*.nupkg" --skip-duplicate
     - name: dotnet nuget push v7
-      run: dotnet nuget push "./KFramework/KFramework/packages/*.nupkg" --source --skip-duplicate
+      run: dotnet nuget push "./KFramework/KFramework/packages/*.nupkg" --skip-duplicate
     - name: dotnet nuget push
       run: dotnet nuget push "./KFramework/packages/*.nupkg" --skip-duplicate

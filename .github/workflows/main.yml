@@ -33,3 +33,6 @@ jobs:
     - name: dotnet nuget push v2
       if: always()
       run: dotnet nuget push **/*.nupkg --skip-duplicate --api-key ${{secrets.NUGET_AUTH_TOKEN}}
+    - name: dotnet nuget push v3
+      if: always()
+      run: dotnet nuget push **/*.nupkg --skip-duplicate --api-key ${{secrets.GITHUB_TOKEN}}

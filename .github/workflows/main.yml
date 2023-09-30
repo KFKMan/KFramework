@@ -1,0 +1,32 @@
+name: Nuget package publish when new release published for .NET
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+
+jobs:
+  build:
+  
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+        source-url: https://nuget.pkg.github.com/${{github.repository_owner}}/index.json
+      env:
+          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}       
+    - name: dotnet restore
+      run: dotnet restore
+    - name: dotnet build
+      run: dotnet build -c Release --no-restore
+    - name: dotnet pack
+      run: dotnet pack -c Release -o packages
+    - name: dotnet nuget push
+      run: dotnet nuget push ./packages/*.nupkg --skip-duplicate

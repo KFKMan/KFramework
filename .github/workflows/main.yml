@@ -28,6 +28,6 @@ jobs:
     - name: dotnet pack
       run: dotnet pack -c Release -o packages
     - name: dotnet nuget push v2
-      run: dotnet nuget push **/*.nupkg --skip-duplicate -k $NUGET_AUTH_TOKEN
+      run: dotnet nuget push **/*.nupkg --skip-duplicate --api-key ${NUGET_AUTH_TOKEN}
       env:
         NUGET_AUTH_TOKEN: ${{secrets.NUGET_AUTH_TOKEN}}

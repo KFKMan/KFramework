@@ -30,22 +30,6 @@ jobs:
     - name: dotnet pack
       run: dotnet pack -c Release -o packages
     - name: dotnet nuget push v2
-      if: always()
-      run: dotnet nuget push **/*.nupkg --skip-duplicate
-    - name: dotnet nuget push v3
-      if: always()
-      run: dotnet nuget push ./KFramework/packages/*.nupkg --skip-duplicate
-    - name: dotnet nuget push v4
-      if: always()
-      run: dotnet nuget push ./KFramework/KFramework/packages/*.nupkg --skip-duplicate
-    - name: dotnet nuget push v5
-      if: always()
-      run: dotnet nuget push "**/*.nupkg" --skip-duplicate
-    - name: dotnet nuget push v6
-      if: always()
-      run: dotnet nuget push "./KFramework/packages/*.nupkg" --skip-duplicate
-    - name: dotnet nuget push v7
-      if: always()
-      run: dotnet nuget push "./KFramework/KFramework/packages/*.nupkg" --skip-duplicate
-    - name: dotnet nuget push
-      run: dotnet nuget push "./KFramework/packages/*.nupkg" --skip-duplicate
+      run: dotnet nuget push **/*.nupkg --skip-duplicate -k $NUGET_AUTH_TOKEN
+      env:
+        NUGET_AUTH_TOKEN: ${{secrets.NUGET_AUTH_TOKEN}}

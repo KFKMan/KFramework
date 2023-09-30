@@ -1,4 +1,4 @@
-name: Nuget package publish when new release published for .NET
+name: Nuget Publisher
 
 on:
   push:
@@ -12,7 +12,7 @@ on:
 jobs:
   build:
   
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     
     steps:
     - name: Setup .NET

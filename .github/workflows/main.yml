@@ -1,4 +1,4 @@
-name: Nuget package publish when new release published for .NET
+name: Nuget Publisher
 
 on:
   push:
@@ -7,26 +7,36 @@ on:
   pull_request:
     branches:
       - master
-
-
 jobs:
   build:
   
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     
     steps:
+    - uses: actions/checkout@v3
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: 7.0.x
         source-url: https://nuget.pkg.github.com/${{github.repository_owner}}/index.json
       env:
           NUGET_AUTH_TOKEN: ${{secrets.NUGET_AUTH_TOKEN}}       
     - name: dotnet restore
-      run: dotnet restore
+      run: dotnet restore 
     - name: dotnet build
       run: dotnet build -c Release --no-restore
     - name: dotnet pack
       run: dotnet pack -c Release -o packages
-    - name: dotnet nuget push
-      run: dotnet nuget push ./packages/*.nupkg --skip-duplicate
+    - name: dotnet auth
+      if: always()
+      run: dotnet nuget add source --username KFKMan --password ${{ secrets.GITHUB_TOKEN }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/KFKMan/index.json"
+    - name: dotnet nuget push v2
+      if: always()
+      run: dotnet nuget push **/*.nupkg --skip-duplicate
+      env:
+          NUGET_AUTH_TOKEN: ${{secrets.NUGET_AUTH_TOKEN}}     
+    - name: dotnet nuget push v3
+      if: always()
+      run: dotnet nuget push **/*.nupkg --skip-duplicate
+      env:
+          NUGET_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}} 

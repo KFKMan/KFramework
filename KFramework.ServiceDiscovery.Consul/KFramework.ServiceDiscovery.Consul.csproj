@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Consul" Version="1.6.10.9" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="7.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KFramework.Abstractions\KFramework.Abstractions.csproj" />
+    <ProjectReference Include="..\KFramework.Extensions\KFramework.Extensions.csproj" />
+    <ProjectReference Include="..\KFramework.ServiceDiscovery.Abstractions\KFramework.ServiceDiscovery.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>

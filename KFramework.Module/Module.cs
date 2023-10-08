@@ -18,6 +18,7 @@ namespace KFramework.Module
             Version = ThisType.Assembly.GetName().Version ?? VersionHelper.DefaultVersion;
         }
 
+        public IList<Type> Implements { get; set; } = new List<Type>();
 
         public Type? MainType { get; set; } = null;
 
@@ -27,9 +28,9 @@ namespace KFramework.Module
 
         public Version Version { get; set; }
 
-        public List<IComponent> Components { get; } = new();
+        public IList<IComponent> Components { get; } = new List<IComponent>();
 
-        public List<IModule> Modules { get; } = new();
+        public IList<IModule> Modules { get; } = new List<IModule>();
 
         public virtual void ConfigureServices(IServiceCollection services, IConfiguration configuration, IHostEnvironment hostEnvironment)
         {
@@ -38,9 +39,9 @@ namespace KFramework.Module
                 component.ConfigureServices(this, services, configuration, hostEnvironment);
             }
 
-            foreach (IModule module in Modules)
+            foreach (IModule submodule in Modules)
             {
-                module.ConfigureServices(services, configuration, hostEnvironment);
+                submodule.ConfigureServices(services, configuration, hostEnvironment);
             }
         }
 

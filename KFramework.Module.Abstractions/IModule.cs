@@ -9,11 +9,13 @@ namespace KFramework.Module.Abstractions
         Type? MainType { get; }
         string Name { get; }
         Version Version { get; }
-        List<IComponent> Components { get; }
-        List<IModule> Modules { get; }
+        IList<IComponent> Components { get; }
+        IList<IModule> Modules { get; }
 
         void ConfigureServices(IServiceCollection services, IConfiguration configuration, IHostEnvironment hostEnvironment);
         IEnumerable<IComponent> GetComponents();
         IModuleInfo GetInfo();
+
+        IList<Type> Implements { get; set; }
     }
 }

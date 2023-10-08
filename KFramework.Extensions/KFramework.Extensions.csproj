@@ -4,6 +4,14 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Company>$(Authors)</Company>
+    <NeutralLanguage>en</NeutralLanguage>
+    <FileVersion>1.0.*</FileVersion>
+    <AssemblyVersion>1.0.*</AssemblyVersion>
+    <PackageLicenseExpression> MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <Version>$(VersionPrefix)</Version>
+    <Deterministic>False</Deterministic>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

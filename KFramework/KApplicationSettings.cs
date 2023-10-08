@@ -28,6 +28,14 @@ namespace KFramework
             return this;
         }
 
+        public bool EnableDepensOnSystem { get; set; } = true;
+
+        public KApplicationSettings ToggleDependsOnSystem(bool state)
+        {
+            EnableDepensOnSystem = state;
+            return this;
+        }
+
         public IServiceCollection? ServiceCollection { get; set; } = null;
 
         public KApplicationSettings SetServiceCollection(IServiceCollection serviceCollection)
